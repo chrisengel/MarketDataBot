@@ -36,15 +36,16 @@ if pricediff < 0:
 	direction = "down"
 else:
 	direction = "up"
-if pricedifffrac > 0.02: 
+if float(pricedifffperc) > 2: 
 	fomotg = "ALERT: HARD-FORK VITALIUM is FOMO'ing " + direction + " by " + str(pricediff2) + " BTC (" + pricediffperc + "%) to " + str(lastprice) + " BTC in the past 5 minutes"
-	token=''
-	bot=telegram.Bot(token=token)
-	bot.sendMessage(chat_id="@ethclassic", text=fomotg)
 
 	f = open('/home/ubuntu/volume1/stakepool/teamspeakbots/etcfomologs.txt', 'a', encoding='utf-8')
 	f.write(str(ts) + " - " + str(lastprice) + "ALERT: HARD-FORK VITALIUM is FOMO'ing [b]" + direction + "[/b] by " + pricediffperc + "% to [b] in the past 5 minutes\n")
 	f.close()
+	token=''
+	bot=telegram.Bot(token=token)
+	bot.sendMessage(chat_id="@ethclassic", text=fomotg)
+
 	time.sleep(3)
 	with ts3.query.TS3Connection("158.69.115.146", 2009) as ts3conn:
 		try:
